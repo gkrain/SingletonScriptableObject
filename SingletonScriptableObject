@@ -1,0 +1,17 @@
+using UnityEngine;
+
+public abstract class SingletonScriptableObject<T> : ScriptableObject where T : ScriptableObject {
+
+    public static T Instance {
+        get {
+            if (_instance == null) {
+                T[] results = Resources.LoadAll<T>("");
+                if (results.Length > 0) _instance = results[0];
+            }
+            return _instance;
+        }
+    }
+
+    private static T _instance = null;
+
+}
